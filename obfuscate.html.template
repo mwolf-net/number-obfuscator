@@ -1,0 +1,15 @@
+<html>
+  <body>
+    <h1>Welcome to the Number Obfuscation Service!</h1>
+    <form action='o.rb' method='GET'>
+      n: <input type='text' name='n' value='34'><br/>
+      d: <input type='text' name='d' value='4'><br/>
+      <input type=submit value='Generate'>
+    </form>
+    <hr/>
+    You can download the latest version of the code here:
+    <a href="XXXVERSIONXXX">XXXVERSIONXXX</a><br/>
+    Or go <a href="/code/obfuscator">here</a> for older versions.<br/>
+  </body>
+</html>
+
