@@ -32,8 +32,6 @@ program. On Ubuntu, you can install this with `sudo apt-get install texinfo`.
 To generate pictures in .png format, you also need the *convert* program, which you can install with
 `sudo apt-get install imagemagick`.
 
-If you want to run the script on your own webserver, installing *mod_ruby* is strongly recommended.
-
 ### Running the script
 
 The basic command is
@@ -43,6 +41,11 @@ The basic command is
 where *n* is the number you want to obfuscate, *d* is the depth (try 3 for a fairly simple
 expression, or 6 for a really nasty one) and *format* is either *tex* or *png*. If you don't specify
 a format, the formula will be output as a Ruby expression.
+
+A separate CGI script, number_obfuscator_cgi.rb, is provided for running on a webserver. Once you have
+it running (which is outside the scope of this README file, sorry) it's just a matter of calling it
+with a GET request, passing the *n* and *d* parameters, as demonstrated by the on-line demo linked to
+above. Configuring your server to use *mod_ruby* is strongly recommended.
 
 That's it, have fun! And please [let me know](https://github.com/mwolf-net/number-obfuscator/issues)
 if it doesn't work, or if you have any improvement suggestions..
