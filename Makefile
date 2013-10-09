@@ -1,4 +1,4 @@
-VERSION      = 0.8
+VERSION      = 0.81
 MYSERVER     = martin@mwolf.net:/var/www/code/obfuscator
 SRCFILES     = number_obfuscator_cgi.rb primes.rb number_obfuscator.rb
 HTML         = obfuscate.html
