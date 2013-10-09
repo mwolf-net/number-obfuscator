@@ -19,16 +19,17 @@ or this:
 You can test it right here:
 
 <form action='http://mwolf.net/code/obfuscator/number_obfuscator_cgi.rb' method='GET'>
-<table>
-  <tr>
-    <td>Enter the number you want to obfuscate:</td>
-    <td><input type='text' name='n' value='34'/></td>
-  </tr>
-  <tr>
-    <td>Enter the desired obfuscation complexity (1-8):</td>
-    <td><input type='text' name='d' value='4'></td>
-  </tr>
-  <input type=submit value='Generate'>
+  <table>
+    <tr>
+      <td>Enter the number you want to obfuscate:</td>
+      <td><input type='text' name='n' value='34'/></td>
+    </tr>
+    <tr>
+      <td>Enter the desired obfuscation complexity (1-8):</td>
+      <td><input type='text' name='d' value='4'/></td>
+    </tr>
+  </table>
+  <input type=submit value='Generate'/>
 </form>
 
 There's an on-line version [here](http://mwolf.net/code/obfuscator/obfuscate.html) where you can
