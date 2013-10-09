@@ -1,6 +1,6 @@
 VERSION      = 0.8
 MYSERVER     = martin@mwolf.net:/var/www/code/obfuscator
-SRCFILES     = o.rb primes.rb number_obfuscator.rb
+SRCFILES     = number_obfuscator_cgi.rb primes.rb number_obfuscator.rb
 HTML         = obfuscate.html
 HTMLTEMPLATE = ${HTML}.template
 FILES        = ${SRCFILES} Makefile ${HTMLTEMPLATE}

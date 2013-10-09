@@ -1,9 +1,9 @@
 <html>
   <body>
     <h1>Welcome to the Number Obfuscation Service!</h1>
-    <form action='o.rb' method='GET'>
-      n: <input type='text' name='n' value='34'><br/>
-      d: <input type='text' name='d' value='4'><br/>
+    <form action='number_obfuscator_cgi.rb' method='GET'>
+      Enter the number you want to obfuscate: <input type='text' name='n' value='34'><br/>
+      Enter the desired obfuscation complexity (1-8): <input type='text' name='d' value='4'><br/>
       <input type=submit value='Generate'>
     </form>
     <hr/>
