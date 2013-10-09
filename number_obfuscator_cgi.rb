@@ -15,7 +15,7 @@
 
 require 'cgi'
 require 'tempfile'
-require 'number_obfuscator'
+require './number_obfuscator'
 
 srand
 

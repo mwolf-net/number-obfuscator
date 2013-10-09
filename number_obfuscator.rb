@@ -14,7 +14,7 @@
 # Written by Martin Wolf, martin@mwolf.net. Free to copy and use as long as
 # my name is kept in the source.
 
-require 'primes'
+require './primes'
 
 module Obfuscator
 
