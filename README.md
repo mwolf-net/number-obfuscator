@@ -27,7 +27,7 @@ run the script locally.
 ### Prerequisites
 
 To generate images with the script, you need to have *TeX* installed; specifically, the *texi2dvi*
-program. On Ubuntu, you can install this with `sudo apt-get install texinfo`.
+program. On Ubuntu, you can install this with `sudo apt-get install texinfo texlive`.
 
 To generate pictures in .png format, you also need the *convert* program, which you can install with
 `sudo apt-get install imagemagick`.
@@ -40,7 +40,16 @@ The basic command is
     
 where *n* is the number you want to obfuscate, *d* is the depth (try 3 for a fairly simple
 expression, or 6 for a really nasty one) and *format* is either *tex* or *png*. If you don't specify
-a format, the formula will be output as a Ruby expression.
+a format, the formula will be output as a Ruby expression. If you specify png, the file will be
+saved as _obfuscated.png_.
+
+In addition to invoking the script from the commandline, you can also load it from another Ruby
+script, like this:
+
+    require './number_obfuscator'
+
+    e = Obfuscator.generate(n, d)
+    Obfuscator.makePNG(e, 'output.png')
 
 A separate CGI script, number_obfuscator_cgi.rb, is provided for running on a webserver. Once you have
 it running (which is outside the scope of this README file, sorry) it's just a matter of calling it
