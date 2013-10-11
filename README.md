@@ -26,11 +26,9 @@ run the script locally.
 
 ### Prerequisites
 
-To generate images with the script, you need to have *TeX* installed; specifically, the *texi2dvi*
-program. On Ubuntu, you can install this with `sudo apt-get install texinfo texlive`.
-
-To generate pictures in .png format, you also need the *convert* program, which you can install with
-`sudo apt-get install imagemagick`.
+To generate images with the script, you need to have *TeX* installed, plus the helper utilities
+*texi2dvi* and *dvipng*. On Ubuntu, you can install this with
+`sudo apt-get install texinfo texlive dvipng`.
 
 ### Running the script
 
