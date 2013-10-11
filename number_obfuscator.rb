@@ -85,9 +85,7 @@ module Obfuscator
     }
 
     system("texi2dvi --build=clean --build-dir=#{tempfile}.t2d #{tempfile}.tex -o #{tempfile}.dvi")
-    system("convert -format PNG -density 300 -alpha off -trim " +
-           "-antialias -border 10 -bordercolor white " + 
-           "#{tempfile}.dvi #{filename}")
+    system("dvipng -D 300 -T tight -o #{filename} #{tempfile}.dvi")
 
     system("rm -rf #{tempfile}*")
   end
