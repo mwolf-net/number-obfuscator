@@ -28,11 +28,11 @@ html: ${HTML}
 %.html: %.md
 	markdown $< > $@
 
-%.png: %.dvi
-	convert -format PNG $< $@
-
 %.dvi: %.tex
 	texi2dvi $<
+
+obfuscated.png: number_obfuscator.rb Makefile
+	ruby number_obfuscator.rb 38 4 png
 
 obfuscated.tex: number_obfuscator.rb Makefile
 	ruby number_obfuscator.rb 38 6 tex > $@

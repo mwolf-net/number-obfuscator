@@ -67,8 +67,8 @@ module Obfuscator
   # Use this helper method to create a full TeX document around a
   # formula.
   def Obfuscator.makeTeX(s)
-    "\\documentclass{article}\n" + 
-    "\\usepackage[pagewidth=\maxdimen,pageheight=\maxdimen]{geometry}" +
+    "\\documentclass{minimal}\n" + 
+    "\\usepackage[paperwidth=100cm,paperheight=100cm]{geometry}" +
     "\\pagestyle{empty}\n"       + 
     "\\begin{document}\n"        + 
     "$$ #{s} $$\n"               + 
@@ -85,7 +85,9 @@ module Obfuscator
     }
 
     system("texi2dvi --build=clean --build-dir=#{tempfile}.t2d #{tempfile}.tex -o #{tempfile}.dvi")
-    system("convert -format PNG -trim -density 200 #{tempfile}.dvi #{filename}")
+    system("convert -format PNG -density 300 -alpha off -trim " +
+           "-antialias -border 10 -bordercolor white " + 
+           "#{tempfile}.dvi #{filename}")
 
     system("rm -rf #{tempfile}*")
   end
