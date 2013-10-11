@@ -1,4 +1,10 @@
 obfuscator-*.tgz
 obfuscate.html
 README.html
+obfuscated.png
+obfuscated.tex
+obfuscated.dvi
+obfuscated.log
+*.aux
+
 

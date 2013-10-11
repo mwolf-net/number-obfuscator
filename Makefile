@@ -7,9 +7,12 @@ TGZFILE      = obfuscator-${VERSION}.tgz
 OLDVERSIONS  = obfuscator-*.tgz
 UPLOADFILES  = ${SRCFILES} ${TGZFILE} ${HTML}
 
-.PHONY: all clean backup upload html
+.PHONY: all clean backup upload html testpicture
 
 all: ${TGZFILE}
+
+testpicture: obfuscated.png
+	gnome-open $<
 
 ${TGZFILE}: ${FILES}
 	tar czf $@ $+
@@ -24,4 +27,13 @@ html: ${HTML}
 
 %.html: %.md
 	markdown $< > $@
+
+%.png: %.dvi
+	convert -format PNG $< $@
+
+%.dvi: %.tex
+	texi2dvi $<
+
+obfuscated.tex: number_obfuscator.rb Makefile
+	ruby number_obfuscator.rb 38 6 tex > $@
 

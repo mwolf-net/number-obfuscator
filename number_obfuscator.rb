@@ -68,6 +68,7 @@ module Obfuscator
   # formula.
   def Obfuscator.makeTeX(s)
     "\\documentclass{article}\n" + 
+    "\\usepackage[pagewidth=\maxdimen,pageheight=\maxdimen]{geometry}" +
     "\\pagestyle{empty}\n"       + 
     "\\begin{document}\n"        + 
     "$$ #{s} $$\n"               + 
