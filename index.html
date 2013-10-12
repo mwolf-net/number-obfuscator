@@ -77,11 +77,9 @@ run the script locally.</p>
 <h3>
 <a name="prerequisites" class="anchor" href="#prerequisites"><span class="octicon octicon-link"></span></a>Prerequisites</h3>
 
-<p>To generate images with the script, you need to have <em>TeX</em> installed; specifically, the <em>texi2dvi</em>
-program. On Ubuntu, you can install this with <code>sudo apt-get install texinfo</code>.</p>
-
-<p>To generate pictures in .png format, you also need the <em>convert</em> program, which you can install with
-<code>sudo apt-get install imagemagick</code>.</p>
+<p>To generate images with the script, you need to have <em>TeX</em> installed, plus the helper utilities
+<em>texi2dvi</em> and <em>dvipng</em>. On Ubuntu, you can install this with
+<code>sudo apt-get install texinfo texlive dvipng</code>.</p>
 
 <h3>
 <a name="running-the-script" class="anchor" href="#running-the-script"><span class="octicon octicon-link"></span></a>Running the script</h3>
@@ -93,7 +91,17 @@ program. On Ubuntu, you can install this with <code>sudo apt-get install texinfo
 
 <p>where <em>n</em> is the number you want to obfuscate, <em>d</em> is the depth (try 3 for a fairly simple
 expression, or 6 for a really nasty one) and <em>format</em> is either <em>tex</em> or <em>png</em>. If you don't specify
-a format, the formula will be output as a Ruby expression.</p>
+a format, the formula will be output as a Ruby expression. If you specify png, the file will be
+saved as <em>obfuscated.png</em>.</p>
+
+<p>In addition to invoking the script from the commandline, you can also load it from another Ruby
+script, like this:</p>
+
+<pre><code>require './number_obfuscator'
+
+e = Obfuscator.generate(n, d)
+Obfuscator.makePNG(e, 'output.png')
+</code></pre>
 
 <p>A separate CGI script, number_obfuscator_cgi.rb, is provided for running on a webserver. Once you have
 it running (which is outside the scope of this README file, sorry) it's just a matter of calling it
