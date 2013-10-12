@@ -14,7 +14,8 @@
 # Written by Martin Wolf, martin@mwolf.net. Free to copy and use as long as
 # my name is kept in the source.
 
-require './primes'
+require 'tempfile'
+require_relative 'primes'
 
 module Obfuscator
 
@@ -40,7 +41,7 @@ module Obfuscator
     #   expression object of the given type, with the value n.
     #   (Note that BinaryExpression implements this method for
     #   all its subclasses; they implement makePair, which returns
-    #   a pair of integers.)
+    #   a pair of integers which together satisfy the equation.)
 
     def self.makeExpression(n, depth)
       if (depth <= 0)
@@ -77,15 +78,23 @@ module Obfuscator
 
   # Use this helper method to create a .png file for a given expression.
   def Obfuscator.makePNG(e, filename)
-    require 'tempfile'
     tempfile = Tempfile.new('obfuscator').path
 
     File.open("#{tempfile}.tex", 'w') { |f|
       f.puts makeTeX(e.to_tex)
     }
 
-    system("texi2dvi --build=clean --build-dir=#{tempfile}.t2d #{tempfile}.tex -o #{tempfile}.dvi")
-    system("dvipng -D 300 -T tight -o #{filename} #{tempfile}.dvi")
+    texcall = "texi2dvi --build=clean --build-dir=#{tempfile}.t2d #{tempfile}.tex -o #{tempfile}.dvi > /dev/null"
+    pngcall = "dvipng -D 300 -T tight -o #{filename} #{tempfile}.dvi"
+
+    # TODO: redirecting to /dev/null probably breaks Windows..
+    if ! system(texcall, :out => '/dev/null' )
+      raise "texi2dvi failed. Is it (and a TeX installation such as texlive) installed?"
+    end
+
+    if ! system(pngcall, :out => '/dev/null')
+      raise "dvipng failed. Is it installed?"
+    end
 
     system("rm -rf #{tempfile}*")
   end
@@ -107,9 +116,8 @@ module Obfuscator
     end
   end
 
-  # This class will generate an ordinary representation of n,
-  # without further obfuscation. (TODO: generate non-decimal
-  # numbers?)
+  # This class will generate an ordinary representation of n, without further
+  # obfuscation. (TODO: generate non-decimal numbers?)
   class Number < Expression
     def initialize(n)
       @n = n
@@ -166,7 +174,7 @@ module Obfuscator
 
     def to_tex
       r = right.to_tex
-      r = "(#{r})" if Subtraction === right
+      r = "(#{r})" if Summation === right || Subtraction === right
       "#{left.to_tex}-#{r}"
     end
 
@@ -272,18 +280,14 @@ if __FILE__ == $0
     else
       puts e.to_s
     end
-    exit
+    exit # exit
   end
 
-  puts "Here are some sample obfuscations for the number 34:"
-  for d in 2 .. 6
-    puts Obfuscator.generate(34, d)
-    puts
-  end
+  puts "Usage:\nruby #{$0} n [d] [format]"
+  puts "\nwhere n is the number you want to obfuscate, d is the depth (try something"
+  puts "in the range 3 - 8) and format is 'png', 'ruby' or 'tex'."
+  puts "For PNG output, a file obfuscated.png will be generated in the current"
+  puts "directory. Requires texi2dvi, texlive and dvipng."
 
-  puts "And here is a small one in TeX format:"
-  puts Obfuscator.generate(34, 4)
-  puts
-  
 end
 
