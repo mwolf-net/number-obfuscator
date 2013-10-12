@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 # This module provides the class Primes, which maintains an array of
 # precomputed prime numbers and offers some methods to use them for purposes
 # such as factorization. It does not pretend to offer the World's Fastest
@@ -19,7 +21,7 @@ module Primes
   # MAX_BYTES controls the largest number we'll attempt to factorize.
   MAX_BYTES = 30
 
-  # Returns an array containing all prime numbers less than or equal to n.
+  # Yields all prime numbers less than or equal to n.
   # This is intended as an internal method, used only for initializing the
   # array of precomputed primes, but you can call it separately if you want.
   def Primes.generatePrimes(n)
@@ -64,6 +66,10 @@ module Primes
     @@primes.each { |p| yield p }
   end
 
+  def Primes.largestKnownPrime
+    return @@primes[-1]
+  end
+
   # Returns an array containing all the factors of n, not counting the trivial
   # factors 1 and n. By default, factors are not duplicated, so e.g. the result
   # for n == 20 will be [2, 5]. If n is not a positive integer, the result will
@@ -73,7 +79,8 @@ module Primes
   # we give up. So if you were planning to use this function to crack RSA keys,
   # you're out of luck.  :-)
   def Primes.factors(n, uniqueOnly = true)
-    return [] if ! n.integer?
+    return [] if ! n.kind_of?(Integer)
+    return [] if n < 2
     return [] if n.size > MAX_BYTES
     fs = []
     sqrt_n = Math.sqrt(n).truncate
@@ -108,7 +115,8 @@ module Primes
   # Determines whether n has any factors less than max_prime; if not then it is
   # prime as far as we are concerned.
   def Primes.isPrime?(n)
-    return false if ! n.integer?
+    return false if ! n.kind_of?(Integer)
+    return false if n < 2
     return isInPrimes?(n) if n < MAX_PRIME
     return false if n.size > MAX_BYTES
     sqrt_n = Math.sqrt(n).truncate
@@ -121,33 +129,25 @@ module Primes
 
 end # class Primes
 
-# Some test code, to be executed when this file is called as a stand-alone
-# program instead of being require'd as a module.
+# Hidden feature: when this module file is executed directly:
+#   * With command-line arguments: factor them
+#   * Without command-line arguments: print primes until aborted (performance
+#     drops sharply after reaching MAX_PRIME).
 if __FILE__ == $0
-  puts "With uniqueonly: %s" % Primes.factors(7000).join(' ')
-  puts "Without uniqueonly: %s" % Primes.factors(7000, false).join(' ')
-  puts "Factoring a prime number: %s" % Primes.factors(19).join(' ')
-  puts "Factoring 1: %s" % Primes.factors(1).join(' ')
-
-  largenumber = 133333333333333333333333333333333
-  f_largenum  = Primes.factors(largenumber, false)
-  puts "Factoring a large but easy number: %s" %
-    f_largenum.join(' ')
-  p_largenum  = 1
-  f_largenum.each { |x| p_largenum *= x }
-  puts "Does that seem correct: #{p_largenum == largenumber}"
-  puts "Is 1 a prime? %s" % Primes.isPrime?(1)
-  puts "Is 2 a prime? %s" % Primes.isPrime?(2)
-  puts "Is 3 a prime? %s" % Primes.isPrime?(3)
-  puts "Is 4 a prime? %s" % Primes.isPrime?(4)
-  puts "Is 19 a prime? %s" % Primes.isPrime?(19)
-  puts "Is 20 a prime? %s" % Primes.isPrime?(20)
-  puts "Is 1000003 a prime? %s (should be true)" % Primes.isPrime?(1000003)
-  puts "Is 1000005 a prime? %s (should be false)" % Primes.isPrime?(1000005)
-
-  puts
-  puts "First 100 prime numbers: #{Primes.all[0,100].join(' ')}"
-  puts "Last  100 prime numbers: #{Primes.all[-100,100].join(' ')}"
+  if ARGV.size > 0
+    for n in ARGV
+      puts "#{n.to_i} = #{Primes.factors(n.to_i, true).join(' * ')}"
+    end
+  else
+    for p in Primes.all
+      puts p
+    end
+    n = Primes.largestKnownPrime + 2
+    while true
+      puts n if Primes.isPrime?(n)
+      n += 2
+    end
+  end
 end
 
 

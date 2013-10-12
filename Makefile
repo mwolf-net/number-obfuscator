@@ -7,9 +7,12 @@ TGZFILE      = obfuscator-${VERSION}.tgz
 OLDVERSIONS  = obfuscator-*.tgz
 UPLOADFILES  = ${SRCFILES} ${TGZFILE} ${HTML}
 
-.PHONY: all clean backup upload html testpicture
+.PHONY: all clean backup upload html testpicture test
 
 all: ${TGZFILE}
+
+test:
+	ruby test/ts_obfuscator.rb
 
 testpicture: obfuscated.png
 	gnome-open $<
