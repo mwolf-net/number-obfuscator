@@ -9,7 +9,7 @@ UPLOADFILES  = ${SRCFILES} ${TGZFILE} ${HTML}
 
 .PHONY: all clean backup upload html testpicture test
 
-all: ${TGZFILE}
+all: test ${TGZFILE}
 
 test:
 	ruby test/ts_obfuscator.rb

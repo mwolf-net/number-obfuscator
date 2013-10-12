@@ -13,11 +13,7 @@ class TestNumberObfuscation < Test::Unit::TestCase
     c = '\{([^\{\}]+)\}'
     begin 
       t1 = (nil == t.gsub!(/\\sqrt#{c}/, 'Math.sqrt(\1)'))
-#      puts t
-#      puts '---------'
       t2 = (nil == t.gsub!(/\\frac#{c}#{c}/, '(\1)/(\2)'))
-#      puts t
-#      puts '----'
     end until t1 && t2
     return t
   end
@@ -29,11 +25,12 @@ class TestNumberObfuscation < Test::Unit::TestCase
     assert_equal(eval(orig), eval(test2), test2)
   end
 
-  def test_ruby_validity
+  def test_expression_validity
     8.times { |d|
       20.times {
-        n  = rand(100) + 1
+        n  = rand(1000) + 1
         e  = Obfuscator.generate(n, d)
+        assert_kind_of(Obfuscator::Expression, e)
         s  = e.to_s
         v  = eval(s)
         t  = e.to_tex
@@ -55,7 +52,8 @@ class TestNumberObfuscation < Test::Unit::TestCase
   end
 
   def test_ordinary_number
-    e = Obfuscator::Number.new(42)
+    e = Obfuscator::Number.make(42)
+    assert_kind_of(Obfuscator::Number, e)
     assert_equal("42", e.to_s)
     assert_equal("42", e.to_tex)
   end
