@@ -55,7 +55,7 @@ class TestNumberObfuscation < Test::Unit::TestCase
   end
 
   def test_ordinary_number
-    e = Obfuscator::Number.make(42)
+    e = Obfuscator::Number.make(42, 1000)
     assert_kind_of(Obfuscator::Number, e)
     assert_equal("42", e.to_s)
     assert_equal("42", e.to_tex)

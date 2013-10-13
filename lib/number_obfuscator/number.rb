@@ -1,12 +1,12 @@
-module Obfuscator
+require_relative 'expression'
 
-  # forward declaration
-  class Expression
-  end
+module Obfuscator
 
   # This class will generate an ordinary representation of n, without further
   # obfuscation. (TODO: generate non-decimal numbers?)
   class Number < Expression
+    addType(Number, 0)
+
     def initialize(n)
       @n = n
     end
@@ -23,7 +23,7 @@ module Obfuscator
       true
     end
 
-    def Number.make(n)
+    def Number.make(n, _)
       Number.new(n)
     end
   end
