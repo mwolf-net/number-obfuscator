@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-require 'number_obfuscator'
+require_relative '../lib/number_obfuscator'
 
 if ARGV.size > 0
   n = ARGV[0]

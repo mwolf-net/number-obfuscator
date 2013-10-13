@@ -1,5 +1,6 @@
-#!/usr/bin/ruby
-require "primes"
+#!/usr/bin/env ruby
+
+require_relative "../lib/number_obfuscator/primes"
 require "test/unit"
 
 class TestPrimes < Test::Unit::TestCase

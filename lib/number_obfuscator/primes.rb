@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 # This module provides the class Primes, which maintains an array of
 # precomputed prime numbers and offers some methods to use them for purposes
