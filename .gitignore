@@ -7,5 +7,5 @@ obfuscated.tex
 obfuscated.dvi
 obfuscated.log
 *.aux
-
+.yardoc
 
