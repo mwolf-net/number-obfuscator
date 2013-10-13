@@ -1,6 +1,6 @@
 require 'test/unit'
 require 'mocha/setup'
-require_relative '../number_obfuscator'
+require 'number_obfuscator'
 
 class C
   def C.f x

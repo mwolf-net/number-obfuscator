@@ -1,0 +1,26 @@
+#!/usr/bin/ruby
+
+require 'number_obfuscator'
+
+if ARGV.size > 0
+  n = ARGV[0]
+  d = ARGV[1]
+  d = 4 if d.to_i < 1
+  e = Obfuscator.generate(n.to_i, d.to_i)
+  if (ARGV[2] == 'png')
+    Obfuscator.makePNG(e, 'obfuscated.png')
+  elsif (ARGV[2] == 'tex')
+    puts Obfuscator.makeTeX(e.to_tex)
+  else
+    puts e.to_s
+  end
+  exit # exit
+end
+
+puts "Usage:\nruby #{$0} n [d] [format]"
+puts "\nwhere n is the number you want to obfuscate, d is the depth (try something"
+puts "in the range 3 - 8) and format is 'png', 'ruby' or 'tex'."
+puts "For PNG output, a file obfuscated.png will be generated in the current"
+puts "directory. Requires texi2dvi, texlive and dvipng."
+
+

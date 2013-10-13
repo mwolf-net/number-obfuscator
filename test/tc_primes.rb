@@ -1,5 +1,5 @@
 #!/usr/bin/ruby
-require_relative "../primes"
+require "primes"
 require "test/unit"
 
 class TestPrimes < Test::Unit::TestCase

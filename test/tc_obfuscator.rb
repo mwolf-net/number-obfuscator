@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../number_obfuscator'
+require 'number_obfuscator'
 
 class TestNumberObfuscation < Test::Unit::TestCase
 
