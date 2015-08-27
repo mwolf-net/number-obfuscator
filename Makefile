@@ -49,7 +49,7 @@ html: ${HTML}
 	markdown $< > $@
 
 obfuscated.png: bin/number_obfuscator Makefile
-	number_obfuscator 38 6 png
+	bin/number_obfuscator 38 6 png
 
 %.dvi: %.tex
 	texi2dvi $<

@@ -32,7 +32,7 @@ class TestNumberObfuscation < Test::Unit::TestCase
     8.times { |d|
       20.times {
         n  = rand(1000) + 1
-        e  = Obfuscator.generate(n, d)
+        e  = Obfuscator.generate(n, d + 1)
         assert_kind_of(Obfuscator::Expression, e)
         s  = e.to_s
         v  = eval(s)

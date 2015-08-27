@@ -62,8 +62,9 @@ module Obfuscator
         expr = nil
         attempts = 1
         while expr.nil? && attempts < 10
-          type = @@types[rand(@@types.size)]
-          expr = type.canDo(n) ? type.make(n, depth) : nil
+          candidates = @@types.select { |t| t.canDo(n) }
+		  type = candidates[rand(candidates.size)]
+          expr = type.make(n, depth)
           attempts += 1
         end
         expr || Number.new(n) # Safety guard for hard-to obfuscate numbers..

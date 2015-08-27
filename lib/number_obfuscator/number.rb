@@ -5,7 +5,7 @@ module Obfuscator
   # This class will generate an ordinary representation of n, without further
   # obfuscation. (TODO: generate non-decimal numbers?)
   class Number < Expression
-    addType(Number, 0)
+    addType(Number, 1)
 
     def initialize(n)
       @n = n
