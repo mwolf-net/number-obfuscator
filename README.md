@@ -12,8 +12,6 @@ or this:
 
 ![](sample-pictures/obfuscated-2.png "slightly more complex example")
 
-[Here is an old blog post with more information.](https://mwolf.net/2009/06/07/number-obfuscator/).
-
 ## How to use it
 
 There's an on-line version [here](http://mail.mwolf.net/code/obfuscator/obfuscate.html) where you can
