@@ -8,7 +8,8 @@ module Obfuscator
       f.puts makeTeX(e.to_tex)
     }
 
-    texcall = "texi2dvi --build=clean --build-dir=#{tempfile}.t2d #{tempfile}.tex -o #{tempfile}.dvi"
+    texcall = "texi2dvi  #{tempfile}.tex -o #{tempfile}.dvi"
+    puts(texcall)
     pngcall = "dvipng -D 300 -T tight -o #{filename} #{tempfile}.dvi"
 
     # TODO: redirecting to /dev/null probably breaks Windows..
